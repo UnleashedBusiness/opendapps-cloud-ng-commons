@@ -1,0 +1,16 @@
+<button [routerLink]="link"
+        [disabled]="disabled"
+        class="text-white rounded-2 d-flex flex-row align-items-center justify-content-center position-relative"
+        style="height: 45px; width: 45px"
+        [class.bg-light]="selected"
+        [class.bg-transparent]="!selected"
+        [matTooltip]="text + (hasRedDot ? ' - Action available' : '')" matTooltipPosition="right" matTooltipClass="tooltip-bigger"
+        hover-class="hover-menu-item">
+  <span class="position-absolute top-0 end-0" *ngIf="hasRedDot">
+    <fa-icon icon="exclamation-circle" class="text-danger"></fa-icon>
+  </span>
+  <span class="position-absolute top-0 end-0" *ngIf="!hasRedDot && isNew">
+    <span class="badge bg-success small" style="    transform: translateX(20px) translateY(-5px);">new</span>
+  </span>
+  <fa-icon [icon]="icon!" style="font-size: 1.5em" *ngIf="icon != undefined"></fa-icon>
+</button>

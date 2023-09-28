@@ -1,0 +1,18 @@
+<div class="d-flex flex-row align-items-center">
+  <span *ngIf="prefix !== undefined">{{prefix}}</span>
+  <span *ngIf="trim">{{address|walletAddress}}</span>
+  <span *ngIf="!trim" class="text-break">
+    <span class="d-none d-lg-flex">{{address}}</span>
+    <span class="d-flex d-lg-none">{{address|walletAddress}}</span>
+  </span>
+  <fa-icon icon="copy" class="ms-1 small cursor-pointer text-stopelon-primary d-none d-lg-flex"
+           matTooltip="Copy to clipboard"
+           (click)="copyAddressToClipboard()"></fa-icon>
+
+  <a [href]="blockchain.explorerUrl + '/address/' + address"
+     target="_blank">
+    <fa-icon icon="external-link-alt" class="ms-1 small cursor-pointer text-stopelon-primary"
+             matTooltip="Open in blockchain explorer"></fa-icon>
+  </a>
+</div>
+

@@ -1,0 +1,20 @@
+<app-loading-overlay-spinner text="Executing transaction..." style="min-height: 400px; display: flex"
+                     *ngIf="tm.running && submitted"></app-loading-overlay-spinner>
+<app-successful-overlay style="min-height: 400px; display: flex"
+  *ngIf="!tm.running && tm.lastResult && submitted
+              && !tm.lastWasProposal"
+  [text]="'Transaction was successful!'"
+  [buttons]="[
+    {'actionText': buttonActionText, 'actionLambda': reload, 'action': ''},
+    {'actionText': 'View transaction in explorer', 'actionLambda': undefined, 'action': connection.blockchain.explorerUrl + '/tx/' + tm.lastTransaction},
+  ]"
+></app-successful-overlay>
+<app-successful-overlay style="min-height: 400px; display: flex"
+  *ngIf="!tm.running && tm.lastResult && submitted
+              && tm.lastWasProposal && decentralizedEntityAddress !== undefined"
+  [text]="'Transaction added to proposal draft!'"
+  [buttons]="[
+    {'actionText': 'Continue', 'actionLambda': reset, 'action': ''},
+    {'actionText': 'Open draft', 'actionLambda': undefined, 'action': '/organization/draft/' + decentralizedEntityAddress},
+  ]"
+></app-successful-overlay>

@@ -1,0 +1,30 @@
+<div class="d-block w-100 text-end" *ngIf="max !== undefined">
+        <span class="text-danger cursor-pointer text-end w-100"
+              (click)="setAmount(max!)">Max: {{max|beautyNumber:'0.2-8'}} {{ticker}}</span>
+</div>
+<app-number-text-field
+  appearance="outline" [float]="float"
+  [placeholder]="placeholder"
+  [ngModel]="amount.toString(10)" (ngModelChange)="amountChange.emit(this.wrapNumber($event))"
+  [required]="required" [name]="name"
+></app-number-text-field>
+<div class="d-flex flex-column justify-content-between mt-2" *ngIf="max !== undefined">
+  <div class="btn-group w-100 mb-2" role="group" aria-label="Basic radio toggle button group w-100 mb-2">
+    <button type="button" class="btn btn-outline-primary wallet-btn w-100"
+            (click)="setAmount(max!.multipliedBy(0.25).decimalPlaces(9, 3))">
+      25%
+    </button>
+    <button type="button" class="btn btn-outline-primary wallet-btn w-100"
+            (click)="setAmount(max!.multipliedBy(0.5).decimalPlaces(9, 3))">
+      50%
+    </button>
+    <button type="button" class="btn btn-outline-primary wallet-btn w-100"
+            (click)="setAmount(max!.multipliedBy(0.75).decimalPlaces(9, 3))">
+      75%
+    </button>
+    <button type="button" class="btn btn-outline-primary wallet-btn w-100"
+            (click)="setAmount(max!.decimalPlaces(9, 3))">
+      100%
+    </button>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+button {
+  border: 0;
+
+  &.bg-light {
+    background: rgba(#f8f9fa, 0.15) !important;
+  }
+
+  &:disabled {
+    color: #4d4d4d !important;
+  }
+}

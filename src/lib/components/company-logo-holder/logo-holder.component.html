@@ -1,0 +1,14 @@
+<div class="rounded-circle" #imageHolder *ngIf="imageUrl != undefined && imageUrl != ''"
+     style="height:{{maxHeight}}px;width: {{maxWidth}}px; display:none; background-color: white;
+                     background-size:cover; background-position: center">
+</div>
+<div #nameTag
+     class="rounded-circle d-flex flex-row align-items-center bg-light justify-content-center mb-0"
+     style="height:{{maxHeight}}px; width: {{maxWidth}}px; ">
+  <ng-container *ngIf="!loadingImage && !loadingImageUrl">
+    <p class="text-decoration-none fw-bold text-dark m-0" style="font-size:{{maxHeight / 2}}px">{{name.substring(0, 1)}}</p>
+  </ng-container>
+  <ng-container *ngIf="loadingImage || loadingImageUrl">
+    <mat-progress-spinner [diameter]="maxHeight * 0.7"  color="accent" mode="indeterminate"></mat-progress-spinner>
+  </ng-container>
+</div>

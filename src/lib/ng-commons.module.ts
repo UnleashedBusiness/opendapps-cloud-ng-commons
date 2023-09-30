@@ -40,7 +40,7 @@ import {HttpServiceConfig} from "@unleashed-business/opendapps-cloud-ts-commons/
         ...ngCommonsComponents
     ]
 })
-export default class NgCommonsModule {
+export class NgCommonsModule {
     public static forRoot(config: NgCommonsConfig): ModuleWithProviders<NgCommonsModule> {
         return {
             ngModule: NgCommonsModule,

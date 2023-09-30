@@ -1,9 +1,18 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "include": [
+    "./src/**/*"
+  ],
+
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts"
+  ],
   "compilerOptions": {
-    "baseUrl": "./src",
-    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -16,17 +25,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "paths": {
-      "ng-commons": [
-        "dist"
-      ]
-    },
     "target": "es2020",
     "module": "es2020",
     "lib": [
       "es2020",
       "dom"
     ],
+    "paths": {
+      "ng-commons": [
+        "dist"
+      ]
+    },
     "skipLibCheck": true
   },
   "angularCompilerOptions": {

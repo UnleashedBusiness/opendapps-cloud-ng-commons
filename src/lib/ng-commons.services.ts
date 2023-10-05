@@ -4,8 +4,7 @@ import {LoadingService} from "./service/loading.service";
 import {Provider} from "@angular/core";
 import {
     NotificationService,
-    TransactionRunningHelperService,
-    WalletConnectionService
+    TransactionRunningHelperService
 } from "@unleashed-business/ts-web3-commons";
 import {
     AssetBackingContract,
@@ -13,7 +12,7 @@ import {
     ContractDeployerContract,
     DecentralizedEntityDeployerContract,
     DecentralizedEntityHttpService,
-    DecentralizedEntityInterfaceContract,
+    DecentralizedEntityInterfaceContract, DeploymentHttpService,
     DymanicTokenomicsContractService,
     GovernorInterfaceContract,
     HttpServicesContainer,
@@ -22,7 +21,7 @@ import {
     MultiSignEntityContract,
     MultiSignProposalHttpService,
     MultiSignSharesEntityContract,
-    NftProxyHttpService,
+    NftProxyHttpService, OpenDAppsCloudRouterContract,
     OwnershipNftCollectionContract,
     OwnershipSharesNftCollectionContract,
     ReferralEngineContract,
@@ -36,9 +35,6 @@ import {
     TokenRewardsTreasuryContract,
     Web3ServicesContainer
 } from "@unleashed-business/opendapps-cloud-ts-commons";
-import OpenDAppsCloudRouterContract
-    from "@unleashed-business/opendapps-cloud-ts-commons/dist/web3/contract/opendapps-cloud-router.contract";
-import DeploymentHttpService from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/deployment.http.service";
 import {
     Erc20TokenContract,
     Erc721Contract,

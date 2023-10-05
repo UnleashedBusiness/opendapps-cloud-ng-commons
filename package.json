@@ -1,9 +1,9 @@
 {
   "name": "@unleashed-business/opendapps-cloud-ng-commons",
-  "version": "1.0.8",
-  "types": "dist/index.d.ts",
+  "version": "1.0.12",
+  "types": "index.d.ts",
   "files": [
-    "/dist"
+    ""
   ],
   "peerDependencies": {
     "@angular/common": ">=16.0.0",
@@ -24,7 +24,7 @@
     "ngx-clipboard": ">=15.0.0",
     "@rooney-and-shadows/ng-commons": ">=1.2.0",
     "@unleashed-business/opendapps-cloud-ts-abi": ">=1.3.0",
-    "@unleashed-business/opendapps-cloud-ts-commons": ">=1.0.4"
+    "@unleashed-business/opendapps-cloud-ts-commons": ">=1.1.1"
   },
   "devDependencies": {
     "@angular/cli": "^16.0.0",

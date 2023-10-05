@@ -38,6 +38,11 @@ import {HttpServiceConfig} from "@unleashed-business/opendapps-cloud-ts-commons/
     exports: [
         ...ngCommonsPipes,
         ...ngCommonsComponents
+    ],
+    providers: [
+        ...ngCommonsServices,
+        ...web3ContractService,
+        ...httpServices,
     ]
 })
 export class NgCommonsModule {

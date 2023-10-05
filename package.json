@@ -1,7 +1,6 @@
 {
   "name": "@unleashed-business/opendapps-cloud-ng-commons",
-  "version": "1.0.7",
-  "main": "dist/index.js",
+  "version": "1.0.8",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"

@@ -5,6 +5,7 @@ export * from './lib/pipe/wallet-address.pipe';
 
 export * from './lib/service/beautiful-number-formatter.service';
 export * from './lib/service/wallet-address-formatter.service';
+export * from './lib/service/loading.service';
 
 export * from './lib/components/company-logo-holder/logo-holder.component';
 export * from './lib/components/side-menu-button/side-menu-button.component';

@@ -20,41 +20,47 @@ import {
   TokenRewardsTreasuryContract, Web3ServicesContainer
 } from "@unleashed-business/opendapps-cloud-ts-commons";
 import {
-  Erc20TokenContract,
+  Erc20TokenContract, TransactionRunningHelperService,
   UniswapFactoryContract,
   UniswapPairContract,
-  UniswapRouterContract, WethContract
+  UniswapRouterContract, WalletConnectionService, WethContract
 } from "@unleashed-business/ts-web3-commons";
-import {Injectable} from "@angular/core";
+import {Inject, Injectable} from "@angular/core";
 
 @Injectable()
 export class NgWeb3ServicesContainer extends Web3ServicesContainer {
   constructor(
-    openDAppsCloudRouter: OpenDAppsCloudRouterContract,
-    decentralizedEntityDeployer: DecentralizedEntityDeployerContract,
-    tokenAsAServiceDeployer: TokenAsAServiceDeployerContract,
-    stakingAsAServiceDeployer: StakingAsAServiceDeployerContract,
-    decentralizedEntityInterface: DecentralizedEntityInterfaceContract,
-    governorInterface: GovernorInterfaceContract,
-    singleOwnerEntity: SingleOwnerEntityContract,
-    multiSignEntity: MultiSignEntityContract,
-    multiSignSharesEntity: MultiSignSharesEntityContract,
-    token: Erc20TokenContract,
-    tokenAsAService: TokenAsAServiceContract,
-    stakingAsAService: StakingAsAServiceContract,
-    dymanicTokenomics: DymanicTokenomicsContractService,
-    inflation: InflationContract,
-    tokenLiquidityTreasury: TokenLiquidityTreasuryContract,
-    tokenRewardsTreasury: TokenRewardsTreasuryContract,
-    uniswapRouter: UniswapRouterContract,
-    uniswapPair: UniswapPairContract,
-    uniswapFactory: UniswapFactoryContract,
-    ownershipNFTCollection: OwnershipNftCollectionContract,
-    ownershipSharesNFTCollection: OwnershipSharesNftCollectionContract,
-    referralEngine: ReferralEngineContract,
-    contractDeployer: ContractDeployerContract,
-    weth: WethContract
+    @Inject(WalletConnectionService)
+    walletConnection: WalletConnectionService,
+    @Inject(TransactionRunningHelperService)
+    transactionHelper: TransactionRunningHelperService
   ) {
-    super(openDAppsCloudRouter, decentralizedEntityDeployer, tokenAsAServiceDeployer, stakingAsAServiceDeployer, decentralizedEntityInterface, governorInterface, singleOwnerEntity, multiSignEntity, multiSignSharesEntity, token, tokenAsAService, stakingAsAService, dymanicTokenomics, inflation, tokenLiquidityTreasury, tokenRewardsTreasury, uniswapRouter, uniswapPair, uniswapFactory, ownershipNFTCollection, ownershipSharesNFTCollection, referralEngine, contractDeployer, weth);
+    const erc20 = new Erc20TokenContract(walletConnection, transactionHelper);
+    super(
+      new OpenDAppsCloudRouterContract(walletConnection, transactionHelper),
+      new DecentralizedEntityDeployerContract(walletConnection, transactionHelper),
+      new TokenAsAServiceDeployerContract(erc20, walletConnection, transactionHelper),
+      new StakingAsAServiceDeployerContract(walletConnection, transactionHelper),
+      new DecentralizedEntityInterfaceContract(walletConnection, transactionHelper),
+      new GovernorInterfaceContract(walletConnection, transactionHelper),
+      new SingleOwnerEntityContract(walletConnection, transactionHelper),
+      new MultiSignEntityContract(walletConnection, transactionHelper),
+      new MultiSignSharesEntityContract(walletConnection, transactionHelper),
+      erc20,
+      new TokenAsAServiceContract(walletConnection, transactionHelper),
+      new StakingAsAServiceContract(erc20, walletConnection, transactionHelper),
+      new DymanicTokenomicsContractService(erc20, walletConnection, transactionHelper),
+      new InflationContract(erc20, walletConnection, transactionHelper),
+      new TokenLiquidityTreasuryContract(erc20, walletConnection, transactionHelper),
+      new TokenRewardsTreasuryContract(erc20, walletConnection, transactionHelper),
+      new UniswapRouterContract(erc20, walletConnection, transactionHelper),
+      new UniswapPairContract(walletConnection, transactionHelper),
+      new UniswapFactoryContract(walletConnection, transactionHelper),
+      new OwnershipNftCollectionContract(walletConnection, transactionHelper),
+      new OwnershipSharesNftCollectionContract(walletConnection, transactionHelper),
+      new ReferralEngineContract(erc20, walletConnection, transactionHelper),
+      new ContractDeployerContract(erc20, walletConnection, transactionHelper),
+      new WethContract(erc20, walletConnection, transactionHelper),
+    );
   }
 }

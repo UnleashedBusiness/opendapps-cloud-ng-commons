@@ -10,14 +10,14 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
-import {WalletConnectionService} from "@unleashed-business/ts-web3-commons";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {firstValueFrom} from "rxjs";
 import {
     WalletConnectionDialogComponent, WalletConnectionDialogData
 } from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
 import {Connector} from "@wagmi/connectors";
-import {HttpServiceConfig} from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/config/http-service.config";
+import { BACKEND_BASE_URL_DI_TOKEN } from "./ng-commons.const";
+import { WalletConnectionService } from "./wallet/wallet-connection.service";
 
 @NgModule({
     imports: [
@@ -54,8 +54,8 @@ export class NgCommonsModule {
                 ...web3ContractService,
                 ...httpServices,
                 {
-                    provide: HttpServiceConfig,
-                    useValue: config.httpServiceConfiguration,
+                    provide: BACKEND_BASE_URL_DI_TOKEN,
+                    useValue: config.baseUrl,
                 },
                 {
                     deps: [MatDialog],
@@ -86,7 +86,7 @@ export class NgCommonsModule {
 export class NgCommonsConfig {
     constructor(
         public readonly walletConnectProviderId: string,
-        public readonly httpServiceConfiguration: HttpServiceConfig
+        public readonly baseUrl: string
     ) {
     }
 }

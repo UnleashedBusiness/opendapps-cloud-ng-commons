@@ -23,9 +23,10 @@ import {
   Erc20TokenContract, TransactionRunningHelperService,
   UniswapFactoryContract,
   UniswapPairContract,
-  UniswapRouterContract, WalletConnectionService, WethContract
+  UniswapRouterContract, WethContract
 } from "@unleashed-business/ts-web3-commons";
 import {Inject, Injectable} from "@angular/core";
+import { WalletConnectionService } from "../wallet/wallet-connection.service";
 
 @Injectable()
 export class NgWeb3ServicesContainer extends Web3ServicesContainer {

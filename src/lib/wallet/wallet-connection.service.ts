@@ -22,7 +22,7 @@ import {
     SUPPORTED_WAGMI_CHAINS, WalletWeb3Connection
 } from "@unleashed-business/ts-web3-commons";
 import { EventEmitter } from "@angular/core";
-import { publicProvider } from "@wagmi/core/dist/providers/public";
+import { publicProvider } from 'wagmi/providers/public'
 
 export class WalletConnectionService extends ReadOnlyWeb3ConnectionService implements WalletWeb3Connection {
     private _wagmiClient?: any = undefined;

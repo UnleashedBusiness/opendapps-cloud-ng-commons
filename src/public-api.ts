@@ -16,3 +16,5 @@ export * from './lib/components/succesful-overlay/successful-overlay.component';
 export * from './lib/components/transaction-overlay/transaction-overlay.component';
 export * from './lib/components/wallet-address-wrapper/wallet-address-wrapper.component';
 export * from './lib/components/wallet-connection-dialog/wallet-connection-dialog.component';
+export * from './lib/wallet/wallet-connection.service';
+export * from './lib/wallet/ethereum-presets';

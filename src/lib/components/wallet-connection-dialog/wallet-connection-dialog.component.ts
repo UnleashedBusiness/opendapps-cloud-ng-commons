@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Connector} from "@wagmi/connectors";
-import {EthereumPresets} from "@unleashed-business/ts-web3-commons/dist/wallet/ethereum-presets"
+import { EthereumPresets } from "../../wallet/ethereum-presets";
 
 @Component({
   selector: 'lib-wallet-connection-dialog',

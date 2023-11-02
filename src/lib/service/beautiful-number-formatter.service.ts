@@ -2,7 +2,9 @@ import {Injectable} from "@angular/core";
 import BigNumber from "bignumber.js";
 import {formatNumber} from "@angular/common";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export default class BeautifulNumberFormatterService {
     private static readonly LEVELS = ['K', 'M', 'B', 'T'];
 

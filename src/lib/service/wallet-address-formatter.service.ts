@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({
+    providedIn: "root"
+})
 export default class WalletAddressFormatterService {
     public format(value: string | undefined, trimSize: number = 15): string {
         if (value == undefined) return '';

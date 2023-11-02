@@ -10,7 +10,9 @@ import {
 import { Inject, Injectable } from "@angular/core";
 import { BACKEND_BASE_URL_DI_TOKEN } from "../ng-commons.const";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class NgHttpServicesContainer extends HttpServicesContainer {
   constructor(@Inject(BACKEND_BASE_URL_DI_TOKEN) baseUrl: string) {
     super(

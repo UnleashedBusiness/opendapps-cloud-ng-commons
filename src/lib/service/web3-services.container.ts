@@ -28,7 +28,9 @@ import {
 import {Inject, Injectable} from "@angular/core";
 import { WalletConnectionService } from "../wallet/wallet-connection.service";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class NgWeb3ServicesContainer extends Web3ServicesContainer {
   constructor(
     @Inject(WalletConnectionService)

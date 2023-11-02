@@ -39,11 +39,7 @@ import { WalletConnectionService } from "./wallet/wallet-connection.service";
         ...ngCommonsPipes,
         ...ngCommonsComponents
     ],
-    providers: [
-        ...ngCommonsServices,
-        ...web3ContractService,
-        ...httpServices,
-    ]
+    providers: []
 })
 export class NgCommonsModule {
     public static forRoot(config: NgCommonsConfig): ModuleWithProviders<NgCommonsModule> {

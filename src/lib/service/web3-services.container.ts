@@ -20,6 +20,7 @@ import {
   TokenRewardsTreasuryContract, Web3ServicesContainer
 } from "@unleashed-business/opendapps-cloud-ts-commons";
 import {
+  ContractToolkitService,
   Erc20TokenContract,
   UniswapFactoryContract,
   UniswapPairContract,
@@ -27,7 +28,6 @@ import {
 } from "@unleashed-business/ts-web3-commons";
 import {Inject, Injectable} from "@angular/core";
 import { WEB3_CONTRACT_TOOLKIT_DI_TOKEN } from "../ng-commons.const";
-import ContractToolkitService from "@unleashed-business/ts-web3-commons/dist/contract/utils/contract-toolkit.service";
 
 @Injectable({
   providedIn: "root"

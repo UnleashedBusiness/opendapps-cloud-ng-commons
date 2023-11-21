@@ -26,9 +26,11 @@ import {
   WEB3_CONTRACT_TOOLKIT_DI_TOKEN,
 } from "./ng-commons.const";
 import { WalletConnectionService } from "./wallet/wallet-connection.service";
-import ContractGeneralConfig from "@unleashed-business/ts-web3-commons/dist/contract/utils/contract-general.config";
-import { TransactionRunningHelperService } from "@unleashed-business/ts-web3-commons";
-import ContractToolkitService from "@unleashed-business/ts-web3-commons/dist/contract/utils/contract-toolkit.service";
+import {
+  ContractGeneralConfig,
+  ContractToolkitService,
+  TransactionRunningHelperService,
+} from "@unleashed-business/ts-web3-commons";
 
 const defaultGeneralContractConfig: ContractGeneralConfig = {
   estimateGasMultiplier: 1.15,

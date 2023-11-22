@@ -1,4 +1,6 @@
 import {
+  AssetBackingContract,
+  BaselineInsuranceDeployerContract,
   ContractDeployerContract,
   DecentralizedEntityDeployerContract,
   DecentralizedEntityInterfaceContract,
@@ -40,6 +42,8 @@ export class NgWeb3ServicesContainer extends Web3ServicesContainer {
     const erc20 = new Erc20TokenContract(toolkit);
     super(
       new OpenDAppsCloudRouterContract(toolkit),
+      new BaselineInsuranceDeployerContract(erc20, toolkit),
+      new AssetBackingContract(erc20, toolkit),
       new DecentralizedEntityDeployerContract(toolkit),
       new TokenAsAServiceDeployerContract(erc20, toolkit),
       new StakingAsAServiceDeployerContract(toolkit),

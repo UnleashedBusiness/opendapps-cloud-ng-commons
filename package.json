@@ -28,7 +28,7 @@
     "ngx-clipboard": ">=15.0.0",
     "@rooney-and-shadows/ng-commons": ">=1.2.0",
     "@unleashed-business/opendapps-cloud-ts-abi": ">=2.0.0",
-    "@unleashed-business/opendapps-cloud-ts-commons": ">=4.1.1",
+    "@unleashed-business/opendapps-cloud-ts-commons": ">=4.2.0",
     "@unleashed-business/ts-web3-commons": ">=4.0.1"
   },
   "devDependencies": {

@@ -36,6 +36,8 @@ const defaultGeneralContractConfig: ContractGeneralConfig = {
   estimateGasMultiplier: 1.15,
   executionConfirmation: 1,
   executionReceiptTimeout: 10_000,
+  blockMintingToleranceIntervalMilliseconds: 30_000,
+  blockMintingTolerance: 10,
 };
 
 @NgModule({

@@ -143,7 +143,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 });
 
                 this._accounts = [account];
-                this._web3 = new Web3((connection as any).provider);
+                this._web3 = new Web3(provider);
                 await this.reloadBalanceCache();
 
                 this.walletConnectedEvent.emit(true);

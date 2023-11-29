@@ -83,12 +83,12 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     autoConnect: false,
                     connectors: [
                         new MetaMaskConnector({chains}),
-                        new WalletConnectConnector({
-                            chains,
-                            options: {
-                                projectId: this.walletConnectProviderId
-                            }
-                        }),
+                        //new WalletConnectConnector({
+                        //    chains,
+                        //    options: {
+                        //        projectId: this.walletConnectProviderId
+                        //    }
+                        //}),
                         new InjectedConnector({
                             chains,
                             options: {
@@ -116,7 +116,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 const connection = await connect({
                     chainId: targetChain,
                     connector: this._connector
-                })
+                });
 
                 const account = connection.account;
                 const selectedChain = connection.chain.id;
@@ -125,10 +125,11 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
                     .filter(x => x.id === selectedChain);
 
-
+                // @ts-ignore
+                const provider = connection.provider ?? await connection.connector?.getProvider()
                 this._walletClient = createWalletClient({
                     // @ts-ignore
-                    transport: custom(connection.provider),
+                    transport: custom(provider),
                     // @ts-ignore
                     chain: wagmiChainFiltered
                 })

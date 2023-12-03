@@ -7,7 +7,6 @@ import {
     WalletClient
 } from "viem";
 import {MetaMaskConnector} from "@wagmi/connectors/metaMask";
-import {WalletConnectConnector} from "@wagmi/connectors/walletConnect";
 import {Connector} from "@wagmi/connectors";
 import {
     configureChains,

@@ -14,6 +14,7 @@ import { HBoxComponent } from "./components/hbox/hbox.component";
 import { ResponsiveParagraphComponent } from "./components/responsive-paragraph/responsive-paragraph.component";
 import { CardViewButtonComponent } from "./components/card-view-row/extra/card-view-button/card-view-button.component";
 import { CommonPageWrapperComponent } from "./components/common-page-wrapper/common-page-wrapper.component";
+import { OverlayComponent } from "./components/overlay/overlay.component";
 
 export const ngCommonsComponents = [
     LogoHolderComponent,
@@ -29,5 +30,6 @@ export const ngCommonsComponents = [
     HBoxComponent,
     ResponsiveParagraphComponent,
     CardViewButtonComponent,
-    CommonPageWrapperComponent
+    CommonPageWrapperComponent,
+    OverlayComponent
 ];

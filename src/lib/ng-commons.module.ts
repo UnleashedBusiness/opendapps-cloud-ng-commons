@@ -53,7 +53,7 @@ const defaultGeneralContractConfig: ContractGeneralConfig = {
     RouterModule,
     MatDialogModule,
   ],
-  declarations: [...ngCommonsPipes, ...ngCommonsComponents, OverlayComponent],
+  declarations: [...ngCommonsPipes, ...ngCommonsComponents],
   exports: [...ngCommonsPipes, ...ngCommonsComponents],
   providers: [],
 })

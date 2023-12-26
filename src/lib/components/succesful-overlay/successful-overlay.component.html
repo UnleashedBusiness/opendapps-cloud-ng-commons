@@ -1,24 +1,22 @@
-<div class="position-absolute w-100 h-100 overlay bg-dark" style="min-height: 400px">
-  <div class="d-flex flex-row align-items-center justify-content-around w-100 h-100">
-    <div class="gap-2 d-flex flex-column justify-content-center align-items-center p-lg-5 p-3 text-center">
-      <div>
-        <fa-icon icon="check-circle" size="5x" class="text-success"></fa-icon>
-      </div>
-      <p class="h4 text-light d-none d-lg-flex">{{text}}</p>
-      <p class="h5 text-light d-flex d-lg-none">{{text}}</p>
-      <div class="d-flex flex-column flex-lg-row gap-2">
-        <ng-container *ngFor="let btn of buttons">
-          <button type="button" class="btn btn-lg btn-outline-primary wallet-btn" data-bs-dismiss="modal"
-                  *ngIf="btn.actionLambda !== undefined" (click)="btn.actionLambda!()"> {{btn.actionText}}</button>
-          <button type="button" class="btn btn-lg btn-outline-primary wallet-btn" data-bs-dismiss="modal"
-                  *ngIf="btn.action != '' && btn.action.indexOf('http') < 0" [routerLink]="btn.action"> {{btn.actionText}}</button>
-          <a class="btn btn-lg btn-outline-primary wallet-btn" target="_blank"
-                  *ngIf="btn.action != '' && btn.action.indexOf('http') >= 0" href="{{btn.action}}">
-            <fa-icon icon="external-link" class="me-2"></fa-icon>
-            {{btn.actionText}}
-          </a>
-        </ng-container>
-      </div>
+<app-overlay [minHeight]="400">
+  <div class="gap-2 d-flex flex-column justify-content-center align-items-center p-lg-5 p-3 text-center">
+    <div>
+      <fa-icon icon="check-circle" size="5x" class="text-success"></fa-icon>
+    </div>
+    <p class="h4 text-light d-none d-lg-flex">{{text}}</p>
+    <p class="h5 text-light d-flex d-lg-none">{{text}}</p>
+    <div class="d-flex flex-column flex-lg-row gap-2">
+      <ng-container *ngFor="let btn of buttons">
+        <button type="button" class="btn btn-lg btn-outline-primary wallet-btn" data-bs-dismiss="modal"
+                *ngIf="btn.actionLambda !== undefined" (click)="btn.actionLambda!()"> {{btn.actionText}}</button>
+        <button type="button" class="btn btn-lg btn-outline-primary wallet-btn" data-bs-dismiss="modal"
+                *ngIf="btn.action != '' && btn.action.indexOf('http') < 0" [routerLink]="btn.action"> {{btn.actionText}}</button>
+        <a class="btn btn-lg btn-outline-primary wallet-btn" target="_blank"
+           *ngIf="btn.action != '' && btn.action.indexOf('http') >= 0" href="{{btn.action}}">
+          <fa-icon icon="external-link" class="me-2"></fa-icon>
+          {{btn.actionText}}
+        </a>
+      </ng-container>
     </div>
   </div>
-</div>
+</app-overlay>

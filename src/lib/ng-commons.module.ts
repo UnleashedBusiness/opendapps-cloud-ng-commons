@@ -31,6 +31,7 @@ import {
   ContractToolkitService,
   TransactionRunningHelperService,
 } from "@unleashed-business/ts-web3-commons";
+import { OverlayComponent } from './components/overlay/overlay.component';
 
 const defaultGeneralContractConfig: ContractGeneralConfig = {
   estimateGasMultiplier: 1.15,
@@ -52,7 +53,7 @@ const defaultGeneralContractConfig: ContractGeneralConfig = {
     RouterModule,
     MatDialogModule,
   ],
-  declarations: [...ngCommonsPipes, ...ngCommonsComponents],
+  declarations: [...ngCommonsPipes, ...ngCommonsComponents, OverlayComponent],
   exports: [...ngCommonsPipes, ...ngCommonsComponents],
   providers: [],
 })

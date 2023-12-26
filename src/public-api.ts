@@ -1,4 +1,5 @@
 export * from "./lib/ng-commons.module";
+export * from "./lib/ng-commons.const";
 
 export * from "./lib/pipe/beautiful-number-format.pipe";
 export * from "./lib/pipe/wallet-address.pipe";

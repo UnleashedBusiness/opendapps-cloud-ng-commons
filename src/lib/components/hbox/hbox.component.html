@@ -1,0 +1,12 @@
+<div class="d-flex {{classText}}"
+     [class.gap-2]="!allowResponsive && !multiline"
+     [class.gap-lg-2]="allowResponsive && !multiline"
+     [class.gap-0]="allowResponsive || multiline"
+     [class.flex-row]="!allowResponsive && !multiline"
+     [class.flex-lg-row]="allowResponsive && !multiline"
+     [class.flex-column]="allowResponsive || multiline"
+     [class.align-items-center]="!allowResponsive && !multiline"
+     [class.align-items-lg-center]="allowResponsive && !multiline"
+>
+  <ng-content></ng-content>
+</div>

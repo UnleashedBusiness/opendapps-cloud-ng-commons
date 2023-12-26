@@ -1,0 +1,27 @@
+<app-hbox
+  [allowResponsive]="buttons.length > 0"
+  classText="text-light align-items-center {{classText}} {{!justified ? 'justify-content-between' : ''}} {{small ? 'small' : ''}}">
+  <app-hbox [allowResponsive]="true" [multiline]="multiline"
+            classText="{{justified ? 'justify-content-between' : ''}}"
+            [class.w-100]="justified">
+    <span *ngIf="displayTitle != ''" class="user-select-none">{{displayTitle}}:</span>
+    <div class="fw-bold mb-0 d-flex flex-column flex-lg-row align-items-lg-center">
+      <ng-content></ng-content>
+    </div>
+  </app-hbox>
+  <app-hbox classText="{{buttons.length > 0 ? 'mt-2 mt-lg-0' : ''}}">
+    <button *ngFor="let button of buttons"
+            type="button"
+            class="btn btn-outline-primary wallet-btn-sm text-white {{button.classText}}"
+            style="white-space: nowrap;"
+            [disabled]="button.disabled"
+            (click)="button.onClick.emit()">
+      <fa-icon class="me-2" [icon]="button.icon" *ngIf="button.icon !== undefined"></fa-icon>
+      {{button.title}}
+    </button>
+    <fa-icon icon="question-circle" *ngIf="tooltipText.length > 0"
+             [matTooltip]="tooltipText"
+             matTooltipClass="tooltip-bigger"
+             matTooltipPosition="right"></fa-icon>
+  </app-hbox>
+</app-hbox>

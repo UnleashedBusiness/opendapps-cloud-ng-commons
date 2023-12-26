@@ -22,8 +22,8 @@ import {
 } from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
 import { Connector } from "@wagmi/connectors";
 import {
-  BACKEND_BASE_URL_DI_TOKEN,
-  WEB3_CONTRACT_TOOLKIT_DI_TOKEN,
+  BACKEND_BASE_URL_DI_TOKEN, IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN,
+  WEB3_CONTRACT_TOOLKIT_DI_TOKEN
 } from "./ng-commons.const";
 import { WalletConnectionService } from "./wallet/wallet-connection.service";
 import {
@@ -84,6 +84,10 @@ export class NgCommonsModule {
           useValue: config.baseUrl,
         },
         {
+          provide: IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN,
+          useValue: config.maxFileSizeInMB ?? 10,
+        },
+        {
           deps: [MatDialog],
           provide: WalletConnectionService,
           useFactory: (matDialog: MatDialog) =>
@@ -116,5 +120,6 @@ export class NgCommonsConfig {
     public readonly walletConnectProviderId: string,
     public readonly baseUrl: string,
     public readonly contractGeneralConfig?: ContractGeneralConfig,
+    public readonly maxFileSizeInMB?: number,
   ) {}
 }

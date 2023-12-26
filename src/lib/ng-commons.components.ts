@@ -9,6 +9,11 @@ import {WalletAddressWrapperComponent} from "./components/wallet-address-wrapper
 import {
     WalletConnectionDialogComponent
 } from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
+import { CardViewRowComponent } from "./components/card-view-row/card-view-row.component";
+import { HBoxComponent } from "./components/hbox/hbox.component";
+import { ResponsiveParagraphComponent } from "./components/responsive-paragraph/responsive-paragraph.component";
+import { CardViewButtonComponent } from "./components/card-view-row/extra/card-view-button/card-view-button.component";
+import { CommonPageWrapperComponent } from "./components/common-page-wrapper/common-page-wrapper.component";
 
 export const ngCommonsComponents = [
     LogoHolderComponent,
@@ -19,5 +24,10 @@ export const ngCommonsComponents = [
     SuccessfulOverlayComponent,
     TransactionOverlayComponent,
     WalletAddressWrapperComponent,
-    WalletConnectionDialogComponent
+    WalletConnectionDialogComponent,
+    CardViewRowComponent,
+    HBoxComponent,
+    ResponsiveParagraphComponent,
+    CardViewButtonComponent,
+    CommonPageWrapperComponent
 ];

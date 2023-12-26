@@ -8,4 +8,6 @@ import { Component, Input } from "@angular/core";
 export class OverlayComponent {
   @Input() bgOpacity = 1;
   @Input() minHeight = 400;
+  @Input() reversePadding = 0;
+  @Input() zIndex = 2;
 }

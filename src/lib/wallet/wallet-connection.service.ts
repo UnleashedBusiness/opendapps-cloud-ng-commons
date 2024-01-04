@@ -24,6 +24,8 @@ import { EventEmitter } from "@angular/core";
 import { publicProvider } from 'wagmi/providers/public'
 
 export class WalletConnectionService extends ReadOnlyWeb3ConnectionService implements WalletWeb3Connection {
+    public static readonly WALLET_CONNECTOR_CACHE_KEY = 'ODAPPS_WALLET_CONNECTOR_CACHE_KEY';
+
     private _wagmiClient?: any = undefined;
     private _connector?: Connector = undefined;
     private _web3?: Web3 = undefined;
@@ -109,12 +111,16 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     targetChainDefinition = allowedChains.filter(x => x.networkId === targetChain)[0];
                 }
 
+                const cachedConnector = localStorage.getItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
+                if (cachedConnector !== null) {
+                    this._connector = this._wagmiClient.connectors.filter((x: Connector) => x.id === cachedConnector).pop();
+                }
                 if (this._connector === undefined) {
                     this._connector = await this.fetchConnectorCallable(this._wagmiClient.connectors, this.walletConnectProviderId) as Connector;
                 }
                 const connection = await connect({
                     chainId: targetChain,
-                    connector: this._connector
+                    connector: this._connector,
                 });
 
                 const account = connection.account;
@@ -127,23 +133,52 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 // @ts-ignore
                 const provider = connection.provider ?? await connection.connector?.getProvider()
                 this._walletClient = createWalletClient({
-                    // @ts-ignore
                     transport: custom(provider),
+                    chain: wagmiChainFiltered.pop()
+                })
+
+                watchNetwork(async (e) => {
+                    const newChain = e.chain;
+                    if (newChain === undefined) {
+                        return this.disconnect();
+                    }
+
+                    this._connectedBlockchainDefinition = allowedChains.filter(x => x.networkId === newChain.id).pop();
+                    const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
+                      .filter(x => x.id === newChain.id)
+                      .pop();
+
+                    if (this._connectedBlockchainDefinition === undefined || wagmiChainFiltered === undefined) {
+                        return this.disconnect();
+                    }
+
+                    const connection = await connect({
+                        chainId: newChain.id,
+                        connector: this._connector!,
+                    });
+
                     // @ts-ignore
-                    chain: wagmiChainFiltered
+                    const provider = connection.provider ?? await connection.connector?.getProvider()
+                    this._walletClient = createWalletClient({
+                        transport: custom(provider),
+                        chain: wagmiChainFiltered
+                    })
                 })
 
-                watchNetwork(_ => {
-                    this.disconnect();
-                })
-
-                watchAccount(_ => {
-                    this.disconnect();
+                watchAccount((e) => {
+                    if (!e.isDisconnected) {
+                        this.disconnect();
+                    }
+                    if (e.isConnected) {
+                        this._accounts = [e.address];
+                    }
                 });
 
                 this._accounts = [account];
                 this._web3 = new Web3(provider);
                 await this.reloadBalanceCache();
+
+                localStorage.setItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY, this._connector.id);
 
                 this.walletConnectedEvent.emit(true);
 
@@ -162,6 +197,8 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
         this._wagmiClient = undefined;
         this._connector = undefined;
         this._accounts = [];
+
+        localStorage.removeItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
 
         this.walletConnectedEvent.emit(false);
     }

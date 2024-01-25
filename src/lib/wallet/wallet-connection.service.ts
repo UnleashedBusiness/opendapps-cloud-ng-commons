@@ -8,7 +8,7 @@ import {
     type Chain,
 } from "viem";
 import {
-    createConfig, fallback, http,
+    createConfig, fallback, http, useConnect, useConnectors,
 } from "wagmi";
 import {injected, metaMask} from 'wagmi/connectors'
 import {
@@ -102,8 +102,9 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 if (cachedConnector !== null) {
                     this._connector = allowedConnectors.filter((x) => x.name === cachedConnector).pop();
                 }
+                const connectorsReady = useConnectors({config: config});
                 if (this._connector === undefined) {
-                    this._connector = await this.fetchConnectorCallable(allowedConnectors, this.walletConnectProviderId);
+                    this._connector = await this.fetchConnectorCallable(connectorsReady as any[], this.walletConnectProviderId);
                 }
                 const connection = await connect(config, {
                     chainId: targetChain,

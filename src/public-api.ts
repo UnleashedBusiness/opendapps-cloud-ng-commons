@@ -29,5 +29,7 @@ export * from "./lib/components/card-view-row/extra/card-view-button/card-view-b
 export * from "./lib/components/base/base.form.component";
 export * from "./lib/components/common-page-wrapper/common-page-wrapper.component";
 export * from "./lib/components/overlay/overlay.component";
+export * from "./lib/components/offscreen-menu-button/offscreen-menu-button.component";
+export * from "./lib/components/offscreen-menu-category/offscreen-menu-category.component";
 export * from "./lib/wallet/wallet-connection.service";
 export * from "./lib/wallet/ethereum-presets";

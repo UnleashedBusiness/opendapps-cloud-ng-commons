@@ -20,7 +20,6 @@ import {
   WalletConnectionDialogComponent,
   WalletConnectionDialogData,
 } from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
-import { Connector } from "@wagmi/connectors";
 import {
   BACKEND_BASE_URL_DI_TOKEN, IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN,
   WEB3_CONTRACT_TOOLKIT_DI_TOKEN
@@ -107,7 +106,7 @@ export class NgCommonsModule {
                       maxWidth: "460px",
                     })
                     .afterClosed(),
-                )) as Connector;
+                ));
               },
             ),
         },

@@ -20,9 +20,7 @@
     "@fortawesome/free-solid-svg-icons": ">=6.4.0",
     "@web3modal/ethereum": ">=2.7.0",
     "@web3modal/html": ">=2.7.0",
-    "@wagmi/core": ">=1.4.3",
-    "@wagmi/connectors": ">=3.1.2",
-    "@metamask/eth-sig-util": "^7.0.0",
+    "@metamask/eth-sig-util": ">=7.0.1",
     "wagmi": ">=1.4.3",
     "rxjs": ">=7.8.0",
     "ngx-clipboard": ">=15.0.0",
@@ -32,14 +30,14 @@
     "@unleashed-business/ts-web3-commons": ">=5.1.8"
   },
   "devDependencies": {
-    "@angular/cli": "^16.0.0",
-    "@angular/compiler-cli": "^16.0.0",
-    "@angular-devkit/build-angular": "^16.0.0",
-    "ng-packagr": "^16.0.0",
-    "typescript": "~5.1.6",
-    "@types/node": "^20.7.1"
+    "@angular/cli": ">=16.0.0",
+    "@angular/compiler-cli": ">=16.0.0",
+    "@angular-devkit/build-angular": ">=16.0.0",
+    "ng-packagr": ">=16.0.0",
+    "typescript": ">=5.1.6",
+    "@types/node": ">=20.7.1"
   },
   "dependencies": {
-    "tslib": "^2.6.0"
+    "tslib": ">=2.6.0"
   }
 }

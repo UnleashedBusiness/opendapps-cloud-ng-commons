@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Connector} from "@wagmi/connectors";
 import { EthereumPresets } from "../../wallet/ethereum-presets";
 
 @Component({
@@ -8,12 +7,12 @@ import { EthereumPresets } from "../../wallet/ethereum-presets";
   templateUrl: './wallet-connection-dialog.component.html',
 })
 export class WalletConnectionDialogComponent {
-  constructor(public dialogRef: MatDialogRef<WalletConnectionDialogComponent, Connector>,
+  constructor(public dialogRef: MatDialogRef<WalletConnectionDialogComponent, any>,
               @Inject(MAT_DIALOG_DATA) public data: WalletConnectionDialogData
   ) {
   }
 
-  selectConnector(connector: Connector) {
+  selectConnector(connector: any) {
     this.dialogRef.close(connector);
   }
 
@@ -29,7 +28,7 @@ export class WalletConnectionDialogComponent {
 
 export class WalletConnectionDialogData {
   constructor(
-    public readonly connectors: Connector[],
+    public readonly connectors: any[],
     public readonly walletConnectProjectId: string,
   ) {
   }

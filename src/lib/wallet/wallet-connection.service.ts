@@ -4,30 +4,26 @@ import {BigNumber} from "bignumber.js";
 import {
     createWalletClient,
     custom,
-    WalletClient
+    WalletClient,
+    type Chain,
 } from "viem";
-import {MetaMaskConnector} from "@wagmi/connectors/metaMask";
-import {Connector} from "@wagmi/connectors";
 import {
-    configureChains,
-    connect,
-    createConfig,
-    InjectedConnector, watchAccount,
-    watchNetwork
-} from "@wagmi/core";
+    createConfig, fallback, http,
+} from "wagmi";
+import {injected, metaMask} from 'wagmi/connectors'
 import {
     BlockchainDefinition,
     DefaultEVMNativeTokenDecimals, ReadOnlyWeb3ConnectionService,
     SUPPORTED_WAGMI_CHAINS, WalletWeb3Connection
 } from "@unleashed-business/ts-web3-commons";
-import { EventEmitter } from "@angular/core";
-import { publicProvider } from 'wagmi/providers/public'
+import {EventEmitter} from "@angular/core";
+import {} from 'viem'
+import {connect, watchChainId, watchAccount, type GetAccountReturnType, type GetChainIdReturnType} from '@wagmi/core'
 
 export class WalletConnectionService extends ReadOnlyWeb3ConnectionService implements WalletWeb3Connection {
     public static readonly WALLET_CONNECTOR_CACHE_KEY = 'ODAPPS_WALLET_CONNECTOR_CACHE_KEY';
 
-    private _wagmiClient?: any = undefined;
-    private _connector?: Connector = undefined;
+    private _connector?: any = undefined;
     private _web3?: Web3 = undefined;
     private _connectedBlockchainDefinition?: BlockchainDefinition = undefined;
     private _walletClient?: WalletClient = undefined;
@@ -59,9 +55,13 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
 
     constructor(
         private readonly walletConnectProviderId: string,
-        private readonly fetchConnectorCallable: (connectors: Connector<any, any>[], walletConnectProviderId: string) => Promise<Connector<any, any>>,
+        private readonly fetchConnectorCallable: (connectors: any[], walletConnectProviderId: string) => Promise<any>,
     ) {
         super();
+    }
+
+    public isLocalAccountConnected(): boolean {
+        return false;
     }
 
     async connectWallet(
@@ -70,37 +70,12 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
     ): Promise<void> {
         return new Promise(async (resolve, reject) => {
             try {
-                const chainsList: any[] = [];
+                const chainsList: Chain[] = [];
                 for (const chain of SUPPORTED_WAGMI_CHAINS) {
                     if (allowedChains.filter(x => x.networkId === chain.id).length > 0) {
                         chainsList.push(chain);
                     }
                 }
-                const {chains, publicClient, webSocketPublicClient} = configureChains(
-                    chainsList,
-                    [publicProvider()],
-                )
-                this._wagmiClient = createConfig({
-                    autoConnect: false,
-                    connectors: [
-                        new MetaMaskConnector({chains}),
-                        //new WalletConnectConnector({
-                        //    chains,
-                        //    options: {
-                        //        projectId: this.walletConnectProviderId
-                        //    }
-                        //}),
-                        new InjectedConnector({
-                            chains,
-                            options: {
-                                name: 'Injected',
-                                shimDisconnect: true,
-                            },
-                        }),
-                    ],
-                    publicClient: publicClient,
-                    webSocketPublicClient: webSocketPublicClient
-                })
 
                 if (allowedChains.filter(x => x.networkId === targetChain).length === 0) {
                     targetChain = undefined;
@@ -111,20 +86,32 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     targetChainDefinition = allowedChains.filter(x => x.networkId === targetChain)[0];
                 }
 
+                const allowedConnectors = [metaMask(), injected()];
+                const transports: any = {};
+
+                for (let chain of allowedChains) {
+                    transports[chain.networkId] = fallback(chain.networkRPC.map(x => http(x)))
+                }
+                const config = createConfig({
+                    chains: chainsList as unknown as readonly [Chain, ...Chain[]],
+                    connectors: allowedConnectors,
+                    transports: transports
+                });
+
                 const cachedConnector = localStorage.getItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
                 if (cachedConnector !== null) {
-                    this._connector = this._wagmiClient.connectors.filter((x: Connector) => x.id === cachedConnector).pop();
+                    this._connector = allowedConnectors.filter((x) => x.name === cachedConnector).pop();
                 }
                 if (this._connector === undefined) {
-                    this._connector = await this.fetchConnectorCallable(this._wagmiClient.connectors, this.walletConnectProviderId) as Connector;
+                    this._connector = await this.fetchConnectorCallable(allowedConnectors, this.walletConnectProviderId);
                 }
-                const connection = await connect({
+                const connection = await connect(config, {
                     chainId: targetChain,
                     connector: this._connector,
                 });
 
-                const account = connection.account;
-                const selectedChain = connection.chain.id;
+                const account = connection.accounts[0];
+                const selectedChain = connection.chainId;
                 this._connectedBlockchainDefinition = targetChainDefinition
                     ?? allowedChains.filter(x => x.networkId === selectedChain)[0];
                 const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
@@ -137,40 +124,44 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     chain: wagmiChainFiltered.pop()
                 })
 
-                watchNetwork(async (e) => {
-                    const newChain = e.chain;
-                    if (newChain === undefined) {
-                        return this.disconnect();
+                watchChainId(config, {
+                    onChange: async (chainId: GetChainIdReturnType) => {
+                        const newChain = chainId;
+                        if (newChain === undefined) {
+                            return this.disconnect();
+                        }
+
+                        this._connectedBlockchainDefinition = allowedChains.filter(x => x.networkId === newChain).pop();
+                        const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
+                            .filter(x => x.id === newChain)
+                            .pop();
+
+                        if (this._connectedBlockchainDefinition === undefined || wagmiChainFiltered === undefined) {
+                            return this.disconnect();
+                        }
+
+                        const connection = await connect(config, {
+                            chainId: newChain,
+                            connector: this._connector!,
+                        });
+
+                        // @ts-ignore
+                        const provider = connection.provider ?? await connection.connector?.getProvider()
+                        this._walletClient = createWalletClient({
+                            transport: custom(provider),
+                            chain: wagmiChainFiltered
+                        })
                     }
+                });
 
-                    this._connectedBlockchainDefinition = allowedChains.filter(x => x.networkId === newChain.id).pop();
-                    const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
-                      .filter(x => x.id === newChain.id)
-                      .pop();
-
-                    if (this._connectedBlockchainDefinition === undefined || wagmiChainFiltered === undefined) {
-                        return this.disconnect();
-                    }
-
-                    const connection = await connect({
-                        chainId: newChain.id,
-                        connector: this._connector!,
-                    });
-
-                    // @ts-ignore
-                    const provider = connection.provider ?? await connection.connector?.getProvider()
-                    this._walletClient = createWalletClient({
-                        transport: custom(provider),
-                        chain: wagmiChainFiltered
-                    })
-                })
-
-                watchAccount((e) => {
-                    if (!e.isDisconnected) {
-                        this.disconnect();
-                    }
-                    if (e.isConnected) {
-                        this._accounts = [e.address];
+                watchAccount(config, {
+                    onChange: (e: GetAccountReturnType) => {
+                        if (!e.isDisconnected) {
+                            this.disconnect();
+                        }
+                        if (e.isConnected) {
+                            this._accounts = [e.address];
+                        }
                     }
                 });
 
@@ -193,8 +184,6 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
     async disconnect() {
         this._web3 = undefined;
         this._connectedBlockchainDefinition = undefined;
-        await this._wagmiClient!.destroy();
-        this._wagmiClient = undefined;
         this._connector = undefined;
         this._accounts = [];
 
@@ -204,9 +193,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
     }
 
     walletConnected(): boolean {
-        return this._wagmiClient !== undefined
-            && this._wagmiClient!.status == "connected"
-            && this._walletClient !== undefined
+        return this._walletClient !== undefined
             && this._accounts.length > 0;
     }
 

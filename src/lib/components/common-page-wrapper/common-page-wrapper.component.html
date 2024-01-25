@@ -7,7 +7,7 @@
           [text]="pageTitle"
         ></app-responsive-paragraph>
         <ng-container *ngIf="targetAddress !== undefined">
-          <span class="d-none d-lg-flex">@</span>
+          <span class="d-none d-lg-flex">&#64;</span>
           <app-wallet-address-wrapper [address]="targetAddress" [trim]="true"
                                       [blockchain]="activeBlockchain"
           ></app-wallet-address-wrapper>

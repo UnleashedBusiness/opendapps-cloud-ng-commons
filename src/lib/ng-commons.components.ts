@@ -15,6 +15,8 @@ import { ResponsiveParagraphComponent } from "./components/responsive-paragraph/
 import { CardViewButtonComponent } from "./components/card-view-row/extra/card-view-button/card-view-button.component";
 import { CommonPageWrapperComponent } from "./components/common-page-wrapper/common-page-wrapper.component";
 import { OverlayComponent } from "./components/overlay/overlay.component";
+import {OffscreenMenuButtonComponent} from "./components/offscreen-menu-button/offscreen-menu-button.component";
+import {OffscreenMenuCategoryComponent} from "./components/offscreen-menu-category/offscreen-menu-category.component";
 
 export const ngCommonsComponents = [
     LogoHolderComponent,
@@ -31,5 +33,7 @@ export const ngCommonsComponents = [
     ResponsiveParagraphComponent,
     CardViewButtonComponent,
     CommonPageWrapperComponent,
-    OverlayComponent
+    OverlayComponent,
+    OffscreenMenuButtonComponent,
+    OffscreenMenuCategoryComponent
 ];

@@ -1,0 +1,19 @@
+<button [routerLink]="link"
+        hover-class="hover-menu-item"
+        [attr.data-bs-target]='dropDownTarget'
+        [attr.data-bs-toggle]="dropDownTarget !== undefined ? 'dropdown' : undefined"
+        [disabled]="disabled"
+        [class.selected]="selected"
+        [class.px-2]="icon !== undefined"
+        [class.px-3]="icon === undefined"
+        class="text-white bg-transparent border-0 p-0 w-100 my-1 d-flex flex-row align-items-center position-relative cursor-pointer justify-content-between"
+        [attr.data-bs-dismiss]="link !== undefined ? 'offcanvas' : undefined">
+  <div class="d-flex flex-row align-items-center" style="min-height: 40px">
+    <fa-icon *ngIf="icon !== undefined" [icon]="icon" style="width: 45px;height: 45px; margin-top: -2px"
+             class="d-flex flex-row align-items-center justify-content-center"></fa-icon>
+    <p class="mb-0 small d-flex flex-row align-items-center">{{ text }}</p>
+    <fa-icon icon="exclamation-circle" class="text-danger ms-2" *ngIf="hasRedDot"></fa-icon>
+    <span class="badge bg-success small ms-2" *ngIf="!hasRedDot && isNew">new</span>
+  </div>
+  <fa-icon icon="chevron-right" class="me-2" *ngIf="link === undefined"></fa-icon>
+</button>

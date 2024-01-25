@@ -85,7 +85,6 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     targetChainDefinition = allowedChains.filter(x => x.networkId === targetChain)[0];
                 }
 
-                const allowedConnectors: CreateConnectorFn<any>[] = [metaMask(), injected()];
                 const transports: any = {};
 
                 for (let chain of allowedChains) {
@@ -93,7 +92,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 }
                 const config = createConfig({
                     chains: chainsList as unknown as readonly [Chain, ...Chain[]],
-                    connectors: allowedConnectors,
+                    connectors: [],
                     transports: transports
                 });
 
@@ -129,7 +128,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     .filter(x => x.id === selectedChain);
 
                 // @ts-ignore
-                const provider = connection.provider ?? await connection.connector?.getProvider()
+                const provider = connection.provider ?? await this._connector!.getProvider()
                 this._walletClient = createWalletClient({
                     transport: custom(provider),
                     chain: wagmiChainFiltered.pop()
@@ -157,7 +156,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                         });
 
                         // @ts-ignore
-                        const provider = connection.provider ?? await connection.connector?.getProvider()
+                        const provider = connection.provider ?? await this._connector?.getProvider()
                         this._walletClient = createWalletClient({
                             transport: custom(provider),
                             chain: wagmiChainFiltered

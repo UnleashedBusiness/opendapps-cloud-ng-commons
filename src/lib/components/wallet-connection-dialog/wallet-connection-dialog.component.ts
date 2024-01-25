@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import { EthereumPresets } from "../../wallet/ethereum-presets";
 
 @Component({
   selector: 'lib-wallet-connection-dialog',
@@ -14,15 +13,6 @@ export class WalletConnectionDialogComponent {
 
   selectConnector(connector: any) {
     this.dialogRef.close(connector);
-  }
-
-  connectorImageId(id: string): string {
-    return EthereumPresets.injectedPreset[id]!.icon;
-  }
-
-
-  connectorName(id: string): string {
-    return EthereumPresets.injectedPreset[id]!.name;
   }
 }
 

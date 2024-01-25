@@ -2,10 +2,8 @@
     <h2 class="mb-0 h3 ">Select Wallet Provider</h2>
     <ng-container *ngFor="let connector of data.connectors">
         <button id="connector-{{connector.id}}"
-                class="btn rounded d-flex flex-row align-items-center gap-3 p-3"
-                [class.btn-outline-light]="connector.ready"
-                [class.btn-outline-dark]="!connector.ready"
-                (click)="connector.ready && selectConnector(connector)">
+                class="btn rounded d-flex flex-row align-items-center gap-3 p-3 btn-outline-light"
+                (click)="selectConnector(connector)">
             <ng-container *ngIf="connector.icon !== undefined">
                 <img [src]="connector.icon" alt="" width="50" height="50"/>
             </ng-container>
@@ -71,7 +69,6 @@
                 </svg>
             </ng-container>
             <p class="h5 mb-0">{{ connector.name }}</p>
-            <span *ngIf="!connector.ready">unavailable</span>
         </button>
     </ng-container>
 </div>

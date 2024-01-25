@@ -99,6 +99,10 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
 
 
                 const connectorsReady = getConnectors(config);
+                if (connectorsReady.length <= 0) {
+                    reject('No wallet providers were found!');
+                    return;
+                }
 
                 const cachedConnector = localStorage.getItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
                 if (cachedConnector !== null) {
@@ -107,6 +111,11 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                 if (this._connector === undefined) {
                     this._connector = await this.fetchConnectorCallable(connectorsReady as any[], this.walletConnectProviderId);
                 }
+                if (this._connector === undefined) {
+                    reject('Wallet provider was not selected!');
+                    return;
+                }
+
                 const connection = await connect(config, {
                     chainId: targetChain,
                     connector: this._connector,

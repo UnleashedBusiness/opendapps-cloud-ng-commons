@@ -8,7 +8,7 @@ import {
     type Chain,
 } from "viem";
 import {
-    createConfig, fallback, http, useConnect, useConnectors,
+    createConfig, createConnector, CreateConnectorFn, fallback, http,
 } from "wagmi";
 import {injected, metaMask} from 'wagmi/connectors'
 import {
@@ -17,8 +17,7 @@ import {
     SUPPORTED_WAGMI_CHAINS, WalletWeb3Connection
 } from "@unleashed-business/ts-web3-commons";
 import {EventEmitter} from "@angular/core";
-import {} from 'viem'
-import {connect, watchChainId, watchAccount, type GetAccountReturnType, type GetChainIdReturnType} from '@wagmi/core'
+import {connect, watchChainId, watchAccount, type GetAccountReturnType, type GetChainIdReturnType, getConnectors} from '@wagmi/core'
 
 export class WalletConnectionService extends ReadOnlyWeb3ConnectionService implements WalletWeb3Connection {
     public static readonly WALLET_CONNECTOR_CACHE_KEY = 'ODAPPS_WALLET_CONNECTOR_CACHE_KEY';
@@ -86,7 +85,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     targetChainDefinition = allowedChains.filter(x => x.networkId === targetChain)[0];
                 }
 
-                const allowedConnectors = [metaMask(), injected()];
+                const allowedConnectors: CreateConnectorFn<any>[] = [metaMask(), injected()];
                 const transports: any = {};
 
                 for (let chain of allowedChains) {
@@ -98,11 +97,13 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     transports: transports
                 });
 
+
+                const connectorsReady = getConnectors(config);
+
                 const cachedConnector = localStorage.getItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
                 if (cachedConnector !== null) {
-                    this._connector = allowedConnectors.filter((x) => x.name === cachedConnector).pop();
+                    this._connector = connectorsReady.filter((x) => x.name === cachedConnector).pop();
                 }
-                const connectorsReady = useConnectors({config: config});
                 if (this._connector === undefined) {
                     this._connector = await this.fetchConnectorCallable(connectorsReady as any[], this.walletConnectProviderId);
                 }

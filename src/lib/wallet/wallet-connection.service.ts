@@ -161,6 +161,8 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                             chain: wagmiChainFiltered
                         });
 
+                        await this.reloadBalanceCache();
+
                         this.walletConnectedEvent.emit(true);
                     }
                 });
@@ -193,6 +195,8 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                                     transport: custom(provider),
                                     chain: wagmiChainFiltered
                                 });
+
+                                await this.reloadBalanceCache();
 
                                 this.walletConnectedEvent.emit(true);
                             }

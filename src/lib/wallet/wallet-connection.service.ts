@@ -8,9 +8,8 @@ import {
     type Chain,
 } from "viem";
 import {
-    createConfig, createConnector, CreateConnectorFn, fallback, http,
+    createConfig, fallback, http,
 } from "wagmi";
-import {injected, metaMask} from 'wagmi/connectors'
 import {
     BlockchainDefinition,
     DefaultEVMNativeTokenDecimals, ReadOnlyWeb3ConnectionService,
@@ -160,17 +159,43 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                         this._walletClient = createWalletClient({
                             transport: custom(provider),
                             chain: wagmiChainFiltered
-                        })
+                        });
+
+                        this.walletConnectedEvent.emit(true);
                     }
                 });
 
                 watchAccount(config, {
-                    onChange: (e: GetAccountReturnType) => {
-                        if (!e.isDisconnected) {
-                            this.disconnect();
-                        }
-                        if (e.isConnected) {
+                    onChange: async (e: GetAccountReturnType) => {
+                        if (e.isDisconnected || e.chain === undefined || allowedChains.filter(x => x.networkId === e.chainId).length <= 0) {
+                            return this.disconnect();
+                        } else if (e.isConnected) {
                             this._accounts = [e.address];
+                            if (e.chainId !== this.blockchain.networkId) {
+                                this._connectedBlockchainDefinition = allowedChains.filter(x => x.networkId === e.chainId).pop();
+                                const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
+                                    .filter(x => x.id === e.chainId)
+                                    .pop();
+
+                                if (this._connectedBlockchainDefinition === undefined || wagmiChainFiltered === undefined) {
+                                    return this.disconnect();
+                                }
+
+                                this._connector = e.connector!;
+                                const connection = await connect(config, {
+                                    chainId: e.chainId,
+                                    connector: e.connector!,
+                                });
+
+                                // @ts-ignore
+                                const provider = connection.provider ?? await this._connector?.getProvider()
+                                this._walletClient = createWalletClient({
+                                    transport: custom(provider),
+                                    chain: wagmiChainFiltered
+                                });
+
+                                this.walletConnectedEvent.emit(true);
+                            }
                         }
                     }
                 });
@@ -195,6 +220,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
         this._web3 = undefined;
         this._connectedBlockchainDefinition = undefined;
         this._connector = undefined;
+        this._walletClient = undefined;
         this._accounts = [];
 
         localStorage.removeItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);

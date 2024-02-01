@@ -195,11 +195,11 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                                     transport: custom(provider),
                                     chain: wagmiChainFiltered
                                 });
-
-                                await this.reloadBalanceCache();
-
-                                this.walletConnectedEvent.emit(true);
                             }
+
+                            await this.reloadBalanceCache();
+
+                            this.walletConnectedEvent.emit(true);
                         }
                     }
                 });

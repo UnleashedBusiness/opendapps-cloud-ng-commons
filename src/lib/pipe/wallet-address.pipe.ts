@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from "@angular/core";
-import WalletAddressFormatterService from "../service/wallet-address-formatter.service";
+import WalletAddressFormatterService from "../service/wallet-address-formatter.service.js";
 
 @Pipe({
     name: 'walletAddress'

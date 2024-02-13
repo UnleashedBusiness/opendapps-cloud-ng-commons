@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
-import { GlobalServiceProviderInterface } from "../../service/global-service-provider.interface";
+import { GlobalServiceProviderInterface } from "../../service/global-service-provider.interface.js";
 import { BlockchainDefinition } from "@unleashed-business/ts-web3-commons";
-import { GLOBALS_SERVICE_PROVIDER_DI_TOKEN } from "../../ng-commons.const";
+import { GLOBALS_SERVICE_PROVIDER_DI_TOKEN } from "../../ng-commons.const.js";
 
 @Component({
   selector: "app-common-page-wrapper",

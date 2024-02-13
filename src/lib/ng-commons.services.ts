@@ -7,8 +7,8 @@ import {
   HttpServicesContainer,
   Web3ServicesContainer,
 } from "@unleashed-business/opendapps-cloud-ts-commons";
-import { NgWeb3ServicesContainer } from "./service/web3-services.container";
-import { NgHttpServicesContainer } from "./service/http-services.container";
+import { NgWeb3ServicesContainer } from "./service/web3-services.container.js";
+import { NgHttpServicesContainer } from "./service/http-services.container.js";
 
 export const ngCommonsServices: Provider[] = [
   { provide: NotificationService, useFactory: () => new NotificationService() },

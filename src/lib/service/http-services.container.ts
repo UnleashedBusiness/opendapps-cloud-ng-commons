@@ -8,10 +8,10 @@ import {
   TokenAsAServiceDeployerHttpService
 } from "@unleashed-business/opendapps-cloud-ts-commons";
 import { Inject, Injectable } from "@angular/core";
-import { BACKEND_BASE_URL_DI_TOKEN } from "../ng-commons.const";
-import { PresaleServiceDeployerHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/presale-service-deployer-http.service";
-import { BlocktimeHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/blocktime-http.service";
-import { StakingAsAServiceDeployerHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/staking-as-a-service-deployer-http.service";
+import { BACKEND_BASE_URL_DI_TOKEN } from "../ng-commons.const.js";
+import { PresaleServiceDeployerHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/presale-service-deployer-http.service.js";
+import { BlocktimeHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/blocktime-http.service.js";
+import { StakingAsAServiceDeployerHttpService } from "@unleashed-business/opendapps-cloud-ts-commons/dist/web2/staking-as-a-service-deployer-http.service.js";
 
 @Injectable({
   providedIn: "root"

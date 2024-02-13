@@ -1,8 +1,8 @@
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { GlobalServiceProviderInterface } from "../../service/global-service-provider.interface";
-import { GLOBALS_SERVICE_PROVIDER_DI_TOKEN } from "../../ng-commons.const";
+import { GlobalServiceProviderInterface } from "../../service/global-service-provider.interface.js";
+import { GLOBALS_SERVICE_PROVIDER_DI_TOKEN } from "../../ng-commons.const.js";
 
 @Component({
   template: "" //Bypass issues with route parameter

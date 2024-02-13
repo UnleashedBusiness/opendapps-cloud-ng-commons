@@ -12,6 +12,7 @@
     "./node_modules/@types/node/index.d.ts"
   ],
   "compilerOptions": {
+    "outDir": "./dist/out-tsc",
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

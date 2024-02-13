@@ -3,9 +3,9 @@ import {
   httpServices,
   ngCommonsServices,
   web3ContractService,
-} from "./ng-commons.services";
-import { ngCommonsPipes } from "./ng-commons.pipes";
-import { ngCommonsComponents } from "./ng-commons.components";
+} from "./ng-commons.services.js";
+import { ngCommonsPipes } from "./ng-commons.pipes.js";
+import { ngCommonsComponents } from "./ng-commons.components.js";
 import { CommonModule } from "@angular/common";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ClipboardModule } from "ngx-clipboard";
@@ -19,18 +19,17 @@ import { firstValueFrom } from "rxjs";
 import {
   WalletConnectionDialogComponent,
   WalletConnectionDialogData,
-} from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
+} from "./components/wallet-connection-dialog/wallet-connection-dialog.component.js";
 import {
   BACKEND_BASE_URL_DI_TOKEN, IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN,
   WEB3_CONTRACT_TOOLKIT_DI_TOKEN
-} from "./ng-commons.const";
-import { WalletConnectionService } from "./wallet/wallet-connection.service";
+} from "./ng-commons.const.js";
+import { WalletConnectionService } from "./wallet/wallet-connection.service.js";
 import {
   ContractGeneralConfig,
   ContractToolkitService,
   TransactionRunningHelperService,
 } from "@unleashed-business/ts-web3-commons";
-import { OverlayComponent } from './components/overlay/overlay.component';
 
 const defaultGeneralContractConfig: ContractGeneralConfig = {
   estimateGasMultiplier: 1.15,

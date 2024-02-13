@@ -5,7 +5,7 @@ import {
 } from "@unleashed-business/ts-web3-commons";
 import { Observable, of, ReplaySubject } from "rxjs";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN } from "../ng-commons.const";
+import { IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN } from "../ng-commons.const.js";
 
 @Injectable({
   providedIn: "root",

@@ -1,10 +1,10 @@
-import Web3 from "web3";
+import {Web3} from "web3";
 import {recoverTypedSignature, SignTypedDataVersion} from "@metamask/eth-sig-util";
 import {BigNumber} from "bignumber.js";
 import {
     createWalletClient,
     custom,
-    WalletClient,
+    type WalletClient,
     type Chain,
 } from "viem";
 import {

@@ -1,5 +1,5 @@
-import { Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
-import { CardViewButtonComponent } from './extra/card-view-button/card-view-button.component.js';
+import { Component, ContentChildren, Input, type OnInit, QueryList } from '@angular/core';
+import { CardViewButtonComponent } from './extra/card-view-button/card-view-button.component';
 
 @Component({
   selector: 'app-card-view-row',

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IconProp} from "@fortawesome/fontawesome-svg-core";
+import {Component, Input, type OnInit} from '@angular/core';
+import {type IconProp} from "@fortawesome/fontawesome-svg-core";
 
 @Component({
   selector: 'app-side-menu-button',

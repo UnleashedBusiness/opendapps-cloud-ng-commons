@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, type OnInit, Output} from '@angular/core';
 import {TransactionRunningHelperService} from '@unleashed-business/ts-web3-commons';
-import { WalletConnectionService } from "../../wallet/wallet-connection.service.js";
+import { WalletConnectionService } from "../../wallet/wallet-connection.service";
 
 @Component({
     selector: 'app-transaction-overlay',

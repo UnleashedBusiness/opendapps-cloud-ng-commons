@@ -13,7 +13,7 @@ import {
 import {
     BlockchainDefinition,
     DefaultEVMNativeTokenDecimals, ReadOnlyWeb3ConnectionService,
-    SUPPORTED_WAGMI_CHAINS, WalletWeb3Connection
+    SUPPORTED_WAGMI_CHAINS, type WalletWeb3Connection
 } from "@unleashed-business/ts-web3-commons";
 import {EventEmitter} from "@angular/core";
 import {connect, watchChainId, watchAccount, type GetAccountReturnType, type GetChainIdReturnType, getConnectors} from '@wagmi/core'

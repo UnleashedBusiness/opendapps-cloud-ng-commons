@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, type OnInit} from '@angular/core';
 import {ClipboardService} from "ngx-clipboard";
 import {BlockchainDefinition, NotificationService} from "@unleashed-business/ts-web3-commons";
 

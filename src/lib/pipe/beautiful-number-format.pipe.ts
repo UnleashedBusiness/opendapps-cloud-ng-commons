@@ -1,6 +1,6 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import {Pipe, type PipeTransform} from "@angular/core";
 import {BigNumber} from "bignumber.js";
-import BeautifulNumberFormatterService from "../service/beautiful-number-formatter.service.js";
+import BeautifulNumberFormatterService from "../service/beautiful-number-formatter.service";
 
 @Pipe({
     name: 'beautyNumber'

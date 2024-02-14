@@ -4,7 +4,6 @@
   "include": [
     "./src/**/*"
   ],
-
   "exclude": [
     "node_modules",
     "./node_modules",
@@ -12,32 +11,52 @@
     "./node_modules/@types/node/index.d.ts"
   ],
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
-    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./",
+    "outDir": "./dist/tsc-out",
+
+    "incremental": true,
+
+    // Type checking
     "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
-    "importHelpers": true,
+    "useDefineForClassFields": true, // Not enabled by default in `strict` mode unless we bump `target` to ES2022.
+    "noFallthroughCasesInSwitch": true, // Not enabled by default in `strict` mode.
+    "noImplicitReturns": true, // Not enabled by default in `strict` mode.
+    "useUnknownInCatchVariables": true, // TODO: This would normally be enabled in `strict` mode but would require some adjustments to the codebase.
+    "noImplicitOverride": true, // Not enabled by default in `strict` mode.
+    "noUnusedLocals": true, // Not enabled by default in `strict` mode.
+    "noUnusedParameters": true, // Not enabled by default in `strict` mode.
+    // TODO: The following options are also not enabled by default in `strict` mode and would be nice to have but would require some adjustments to the codebase.
+    // "exactOptionalPropertyTypes": true,
+    // "noUncheckedIndexedAccess": true,
+
+    // JavaScript support
+    "allowJs": false,
+    "checkJs": false,
+
+    // Interop constraints
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": false,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "importHelpers": true, // This is only used for build validation. Since we do not have `tslib` installed, this will fail if we accidentally make use of anything that'd require injection of helpers.
+
+    // Language and environment
+    "moduleResolution": "Node",
+    "module": "ESNext",
     "target": "ES2022",
     "lib": [
       "ES2022",
-      "dom"
+      "DOM" // We are adding `DOM` here to get the `fetch`, etc. types. This should be removed once these types are available via DefinitelyTyped.
     ],
-    "paths": {
-      "ng-commons": [
-        "dist"
-      ]
-    },
+
+    // Skip type checking for node modules
     "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "preserveSymlinks": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

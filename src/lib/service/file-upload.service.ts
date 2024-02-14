@@ -4,8 +4,8 @@ import {
   PushNotification,
 } from "@unleashed-business/ts-web3-commons";
 import { Observable, of, ReplaySubject } from "rxjs";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN } from "../ng-commons.const.js";
+import { type IconProp } from "@fortawesome/fontawesome-svg-core";
+import { IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN } from "../ng-commons.const";
 
 @Injectable({
   providedIn: "root",

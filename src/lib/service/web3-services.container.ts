@@ -4,70 +4,73 @@ import {
   Web3Contract,
 } from "@unleashed-business/ts-web3-commons";
 import { Inject, Injectable } from "@angular/core";
-import { WEB3_CONTRACT_TOOLKIT_DI_TOKEN } from "../ng-commons.const.js";
+import { WEB3_CONTRACT_TOOLKIT_DI_TOKEN } from "../ng-commons.const";
 import {
   OpenDAppsCloudRouterAbi,
-  OpenDAppsCloudRouterAbiFunctional
-} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/opendapps-cloud-router.abi.js";
+  type OpenDAppsCloudRouterAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/opendapps-cloud-router.abi";
 import {
   AssetBackingAbi,
-  AssetBackingAbiFunctional,
+  type AssetBackingAbiFunctional,
   BaselineInsuranceServiceDeployerAbi,
-  BaselineInsuranceServiceDeployerAbiFunctional, ContractDeployerAbi, ContractDeployerAbiFunctional,
+  type BaselineInsuranceServiceDeployerAbiFunctional, ContractDeployerAbi, type ContractDeployerAbiFunctional,
   DecentralizedEntityDeployerAbi,
-  DecentralizedEntityDeployerAbiFunctional,
+  type DecentralizedEntityDeployerAbiFunctional,
   DecentralizedEntityInterfaceAbi,
-  DecentralizedEntityInterfaceAbiFunctional,
+  type DecentralizedEntityInterfaceAbiFunctional,
   DynamicTokenomicsAbi,
-  DynamicTokenomicsAbiFunctional,
+  type DynamicTokenomicsAbiFunctional,
   InflationAbi,
-  InflationAbiFunctional,
+  type InflationAbiFunctional,
   MultiSignEntityAbi,
-  MultiSignEntityAbiFunctional,
+  type MultiSignEntityAbiFunctional,
   MultiSignSharesEntityAbi,
-  MultiSignSharesEntityAbiFunctional,
+  type MultiSignSharesEntityAbiFunctional,
   OwnershipNFTCollectionAbi,
-  OwnershipNFTCollectionAbiFunctional, OwnershipSharesNFTCollectionAbi,
-  OwnershipSharesNFTCollectionAbiFunctional,
+  type OwnershipNFTCollectionAbiFunctional,
+  OwnershipSharesNFTCollectionAbi,
+  type OwnershipSharesNFTCollectionAbiFunctional,
   ProposalGovernorInterfaceAbi,
-  ProposalGovernorInterfaceAbiFunctional, ReferralsEngineAbi, ReferralsEngineAbiFunctional,
+  type ProposalGovernorInterfaceAbiFunctional,
+  ReferralsEngineAbi,
+  type ReferralsEngineAbiFunctional,
   SingleOwnerEntityAbi,
-  SingleOwnerEntityAbiFunctional,
+  type SingleOwnerEntityAbiFunctional,
   StakingAsAServiceAbi,
-  StakingAsAServiceAbiFunctional,
+  type StakingAsAServiceAbiFunctional,
   StakingAsAServiceDeployerAbi,
-  StakingAsAServiceDeployerAbiFunctional,
+  type StakingAsAServiceDeployerAbiFunctional,
   TokenAsAServiceAbi,
-  TokenAsAServiceAbiFunctional,
+  type TokenAsAServiceAbiFunctional,
   TokenAsAServiceDeployerAbi,
-  TokenAsAServiceDeployerAbiFunctional,
+  type TokenAsAServiceDeployerAbiFunctional,
   TokenLiquidityTreasuryAbi,
-  TokenLiquidityTreasuryAbiFunctional,
+  type TokenLiquidityTreasuryAbiFunctional,
   TokenRewardsTreasuryAbi,
-  TokenRewardsTreasuryAbiFunctional
+  type TokenRewardsTreasuryAbiFunctional
 } from "@unleashed-business/opendapps-cloud-ts-abi";
-import { Erc20Abi, Erc20AbiFunctional } from "@unleashed-business/ts-web3-commons/dist/abi/erc20.abi.js";
+import { Erc20Abi, type Erc20AbiFunctional } from "@unleashed-business/ts-web3-commons/dist/abi/erc20.abi";
 import {
   UniswapRouterAbi,
-  UniswapRouterAbiFunctional
-} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-router.abi.js";
+  type UniswapRouterAbiFunctional
+} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-router.abi";
 import {
   UniswapPairAbi,
-  UniswapPairAbiFunctional
-} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-pair.abi.js";
+  type UniswapPairAbiFunctional
+} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-pair.abi";
 import {
   UniswapFactoryAbi,
-  UniswapFactoryAbiFunctional
-} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-factory.abi.js";
-import { WETHAbi, WETHAbiFunctional } from "@unleashed-business/ts-web3-commons/dist/abi/weth.abi.js";
+  type UniswapFactoryAbiFunctional
+} from "@unleashed-business/ts-web3-commons/dist/abi/uniswap-factory.abi";
+import { WETHAbi, type WETHAbiFunctional } from "@unleashed-business/ts-web3-commons/dist/abi/weth.abi";
 import {
   PresaleServiceAbi,
-  PresaleServiceAbiFunctional
-} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/presale-service.abi.js";
+  type PresaleServiceAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/presale-service.abi";
 import {
   PresaleServiceDeployerAbi,
-  PresaleServiceDeployerAbiFunctional
-} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/presale-service-deployer.abi.js";
+  type PresaleServiceDeployerAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/presale-service-deployer.abi";
 
 @Injectable({
   providedIn: "root",

@@ -1,11 +1,11 @@
-import { ModuleWithProviders, NgModule } from "@angular/core";
+import { type ModuleWithProviders, NgModule } from "@angular/core";
 import {
   httpServices,
   ngCommonsServices,
   web3ContractService,
-} from "./ng-commons.services.js";
-import { ngCommonsPipes } from "./ng-commons.pipes.js";
-import { ngCommonsComponents } from "./ng-commons.components.js";
+} from "./ng-commons.services";
+import { ngCommonsPipes } from "./ng-commons.pipes";
+import { ngCommonsComponents } from "./ng-commons.components";
 import { CommonModule } from "@angular/common";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ClipboardModule } from "ngx-clipboard";
@@ -19,17 +19,18 @@ import { firstValueFrom } from "rxjs";
 import {
   WalletConnectionDialogComponent,
   WalletConnectionDialogData,
-} from "./components/wallet-connection-dialog/wallet-connection-dialog.component.js";
+} from "./components/wallet-connection-dialog/wallet-connection-dialog.component";
 import {
   BACKEND_BASE_URL_DI_TOKEN, IMAGE_UPLOAD_MAX_SIZE_DI_TOKEN,
   WEB3_CONTRACT_TOOLKIT_DI_TOKEN
-} from "./ng-commons.const.js";
-import { WalletConnectionService } from "./wallet/wallet-connection.service.js";
+} from "./ng-commons.const";
+import { WalletConnectionService } from "./wallet/wallet-connection.service";
 import {
   ContractGeneralConfig,
   ContractToolkitService,
   TransactionRunningHelperService,
 } from "@unleashed-business/ts-web3-commons";
+import {HoverClassDirective} from "./directive/hover-class.directive";
 
 const defaultGeneralContractConfig: ContractGeneralConfig = {
   estimateGasMultiplier: 1.15,
@@ -51,8 +52,8 @@ const defaultGeneralContractConfig: ContractGeneralConfig = {
     RouterModule,
     MatDialogModule,
   ],
-  declarations: [...ngCommonsPipes, ...ngCommonsComponents],
-  exports: [...ngCommonsPipes, ...ngCommonsComponents],
+  declarations: [...ngCommonsPipes, ...ngCommonsComponents, HoverClassDirective],
+  exports: [...ngCommonsPipes, ...ngCommonsComponents, HoverClassDirective],
   providers: [],
 })
 export class NgCommonsModule {

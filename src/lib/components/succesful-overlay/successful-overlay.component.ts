@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, type OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-successful-overlay',

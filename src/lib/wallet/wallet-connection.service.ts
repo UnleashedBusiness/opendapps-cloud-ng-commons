@@ -104,7 +104,7 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
 
                 const cachedConnector = localStorage.getItem(WalletConnectionService.WALLET_CONNECTOR_CACHE_KEY);
                 if (cachedConnector !== null) {
-                    this._connector = connectorsReady.filter((x) => x.name === cachedConnector).pop();
+                    this._connector = connectorsReady.filter((x) => x.id === cachedConnector).pop();
                 }
                 if (this._connector === undefined) {
                     this._connector = await this.fetchConnectorCallable(connectorsReady as any[], this.walletConnectProviderId);

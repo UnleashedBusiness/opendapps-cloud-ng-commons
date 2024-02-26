@@ -1,6 +1,6 @@
 {
   "name": "@unleashed-business/opendapps-cloud-ng-commons",
-  "version": "4.0.2",
+  "version": "4.1.0-beta.0",
   "types": "index.d.ts",
   "type": "module",
   "files": [
@@ -26,8 +26,8 @@
     "rxjs": ">=7.8.0",
     "ngx-clipboard": ">=15.0.0",
     "@rooney-and-shadows/ng-commons": ">=1.2.0",
-    "@unleashed-business/opendapps-cloud-ts-abi": "^2.3.0",
-    "@unleashed-business/opendapps-cloud-ts-commons": "^6.0.1",
+    "@unleashed-business/opendapps-cloud-ts-abi": "^2.7.0",
+    "@unleashed-business/opendapps-cloud-ts-commons": "^6.1.0-beta.2",
     "@unleashed-business/ts-web3-commons": "^6.0.1",
     "wagmi": "^2.5.7",
     "@metamask/eth-sig-util": ">=7.0.1"

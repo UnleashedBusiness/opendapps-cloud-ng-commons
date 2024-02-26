@@ -71,6 +71,18 @@ import {
   PresaleServiceDeployerAbi,
   type PresaleServiceDeployerAbiFunctional
 } from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/presale-service-deployer.abi";
+import {
+  TreasuryAbi,
+  type TreasuryAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/treasury.abi";
+import {
+  TreasuryPocketAbi,
+  type TreasuryPocketAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/treasury-pocket.abi";
+import {
+  TreasuryDeployerAbi,
+  type TreasuryDeployerAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/treasury-deployer.abi";
 
 @Injectable({
   providedIn: "root",
@@ -109,6 +121,9 @@ export class NgWeb3ServicesContainer extends Web3ServicesContainer {
       new Web3Contract<WETHAbiFunctional>(toolkit, WETHAbi),
       new Web3Contract<PresaleServiceAbiFunctional>(toolkit, PresaleServiceAbi),
       new Web3Contract<PresaleServiceDeployerAbiFunctional>(toolkit, PresaleServiceDeployerAbi),
+      new Web3Contract<TreasuryAbiFunctional>(toolkit, TreasuryAbi),
+      new Web3Contract<TreasuryPocketAbiFunctional>(toolkit, TreasuryPocketAbi),
+      new Web3Contract<TreasuryDeployerAbiFunctional>(toolkit, TreasuryDeployerAbi),
     );
   }
 }

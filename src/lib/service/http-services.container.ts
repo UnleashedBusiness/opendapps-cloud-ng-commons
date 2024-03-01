@@ -5,6 +5,7 @@ import {
   IndexingHttpService,
   MultiSignProposalHttpService,
   NftProxyHttpService,
+  StatsHttpService,
   TokenAsAServiceDeployerHttpService
 } from "@unleashed-business/opendapps-cloud-ts-commons";
 import { Inject, Injectable } from "@angular/core";
@@ -28,6 +29,7 @@ export class NgHttpServicesContainer extends HttpServicesContainer {
       new PresaleServiceDeployerHttpService(baseUrl),
       new BlocktimeHttpService(baseUrl),
       new StakingAsAServiceDeployerHttpService(baseUrl),
+      new StatsHttpService(baseUrl),
     );
   }
 }

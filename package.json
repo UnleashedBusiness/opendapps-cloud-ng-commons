@@ -27,8 +27,8 @@
     "ngx-clipboard": ">=15.0.0",
     "@rooney-and-shadows/ng-commons": ">=1.2.0",
     "@unleashed-business/opendapps-cloud-ts-abi": "^2.7.0",
-    "@unleashed-business/opendapps-cloud-ts-commons": "^6.1.0",
-    "@unleashed-business/ts-web3-commons": "^6.0.1",
+    "@unleashed-business/opendapps-cloud-ts-commons": "^6.1.1-beta.0",
+    "@unleashed-business/ts-web3-commons": "^6.0.3-beta.4",
     "wagmi": "^2.5.7",
     "@metamask/eth-sig-util": ">=7.0.1"
   },

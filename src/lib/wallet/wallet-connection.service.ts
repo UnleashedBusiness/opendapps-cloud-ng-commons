@@ -114,20 +114,28 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
                     return;
                 }
 
-                const connection = await connect(config, {
-                    chainId: targetChain,
-                    connector: this._connector,
-                });
+                let accounts = await this._connector.getAccounts();
+                let selectedChain = await this._connector.getChainId();
+                // @ts-ignore
+                let provider = await this._connector.getProvider();
 
-                const account = connection.accounts[0];
-                const selectedChain = connection.chainId;
+                if (accounts === undefined || accounts.length === 0) {
+                    const connection = await connect(config, {
+                        chainId: targetChain,
+                        connector: this._connector,
+                    });
+                    selectedChain = connection.chainId;
+                    accounts = connection.accounts;
+                    // @ts-ignore
+                    provider = connection.provider ?? await this._connector.getProvider();
+                }
+                const account = accounts[0];
+
                 this._connectedBlockchainDefinition = targetChainDefinition
                     ?? allowedChains.filter(x => x.networkId === selectedChain)[0];
                 const wagmiChainFiltered = SUPPORTED_WAGMI_CHAINS
                     .filter(x => x.id === selectedChain);
 
-                // @ts-ignore
-                const provider = connection.provider ?? await this._connector!.getProvider()
                 this._walletClient = createWalletClient({
                     transport: custom(provider),
                     chain: wagmiChainFiltered.pop()

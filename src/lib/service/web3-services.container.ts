@@ -83,6 +83,11 @@ import {
   TreasuryDeployerAbi,
   type TreasuryDeployerAbiFunctional
 } from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/treasury-deployer.abi";
+import {VestingAbi, type VestingAbiFunctional} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/vesting.abi";
+import {
+  VestingDeployerAbi,
+  type VestingDeployerAbiFunctional
+} from "@unleashed-business/opendapps-cloud-ts-abi/dist/abi/vesting-deployer.abi";
 
 @Injectable({
   providedIn: "root",
@@ -124,6 +129,8 @@ export class NgWeb3ServicesContainer extends Web3ServicesContainer {
       new Web3Contract<TreasuryAbiFunctional>(toolkit, TreasuryAbi),
       new Web3Contract<TreasuryPocketAbiFunctional>(toolkit, TreasuryPocketAbi),
       new Web3Contract<TreasuryDeployerAbiFunctional>(toolkit, TreasuryDeployerAbi),
+      new Web3Contract<VestingAbiFunctional>(toolkit, VestingAbi),
+      new Web3Contract<VestingDeployerAbiFunctional>(toolkit, VestingDeployerAbi),
     );
   }
 }

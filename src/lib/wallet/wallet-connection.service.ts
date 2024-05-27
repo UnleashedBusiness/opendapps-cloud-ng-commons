@@ -116,19 +116,16 @@ export class WalletConnectionService extends ReadOnlyWeb3ConnectionService imple
 
                 let accounts = await this._connector.getAccounts();
                 let selectedChain = await this._connector.getChainId();
-                // @ts-ignore
-                let provider = await this._connector.getProvider();
 
-                if (accounts === undefined || accounts.length === 0) {
-                    const connection = await connect(config, {
-                        chainId: targetChain,
-                        connector: this._connector,
-                    });
-                    selectedChain = connection.chainId;
-                    accounts = connection.accounts;
-                    // @ts-ignore
-                    provider = connection.provider ?? await this._connector.getProvider();
-                }
+                const connection = await this._connector.connect({
+                    chainId: targetChain,
+                    isReconnecting: accounts !== undefined && accounts.length > 0
+                });
+
+                selectedChain = connection.chainId;
+                accounts = connection.accounts;
+                // @ts-ignore
+                const provider = connection.provider ?? await this._connector.getProvider();
                 const account = accounts[0];
 
                 this._connectedBlockchainDefinition = targetChainDefinition

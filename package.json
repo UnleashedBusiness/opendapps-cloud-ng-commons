@@ -1,10 +1,6 @@
 {
   "name": "@unleashed-business/opendapps-cloud-ng-commons",
-<<<<<<< HEAD
-  "version": "4.1.2",
-=======
   "version": "4.1.3",
->>>>>>> refs/heads/dev
   "types": "index.d.ts",
   "type": "module",
   "files": [

@@ -13,6 +13,8 @@ export class ExtendedAmountInputComponent {
     @Input() placeholder = '';
     @Input() amount: BigNumber = new BigNumber(0);
     @Input() float = true;
+    @Input() minDecimals = 2;
+    @Input() maxDecimals = 6;
     @Output() amountChange = new EventEmitter<BigNumber>();
 
     wrapNumber(num: string | number): BigNumber {

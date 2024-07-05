@@ -5,6 +5,8 @@
 <app-number-text-field
   appearance="outline" [float]="float"
   [placeholder]="placeholder"
+  [minDecimals]="minDecimals"
+  [maxDecimals]="maxDecimals"
   [ngModel]="amount.toString(10)" (ngModelChange)="amountChange.emit(this.wrapNumber($event))"
   [required]="required" [name]="name"
 ></app-number-text-field>
